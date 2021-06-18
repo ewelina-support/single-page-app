@@ -12,8 +12,10 @@ const navbar = document.getElementById("navbar");
 const content = document.getElementById("content");
 
 const router = async () => {
-  // 👉 Replace this with callback handler 👈
-
+if (new URLSearchParams(window.location.search).has("code")) {
+ await window.auth0Client.handleRedirectCallback();
+ window.history.replaceState({}, document.title, "/");
+}
   // 👉 Replace this with user profile handler 👈
 
   const request = location.hash.slice(1).toLowerCase() || "/";
