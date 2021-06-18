@@ -16,8 +16,10 @@ if (new URLSearchParams(window.location.search).has("code")) {
  await window.auth0Client.handleRedirectCallback();
  window.history.replaceState({}, document.title, "/");
 }
-  // 👉 Replace this with user profile handler 👈
-
+  
+if (await window.auth0Client.isAuthenticated())
+ window.user = await window.auth0Client.getUser();
+  
   const request = location.hash.slice(1).toLowerCase() || "/";
   const page = routes[request] || Error404;
 
